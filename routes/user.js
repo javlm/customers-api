@@ -31,7 +31,7 @@ router.post("/signup", async (request, response) => {
   }
 });
 
-router.put('/account/update/:id', Middleware, async (request, response) => {
+router.put('/account/:id', Middleware, async (request, response) => {
   try {
     const { id } = request.params;
     const { username, password, email, birthday, phone } = request.body;
@@ -52,7 +52,7 @@ router.put('/account/update/:id', Middleware, async (request, response) => {
   }
 });
 
-router.delete('/account/delete/:id', Middleware, async (request, response) => {
+router.delete('/account/:id', Middleware, async (request, response) => {
   try {
     const { id } = request.params;
 
