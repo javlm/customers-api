@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken');
 
-const middleware = (request, response) => {
+const middleware = (request, response, next) => {
     const token = request.header('Authorization');
+    console.log(token)
 
     if (!token) return response.status(401).json({ msg: 'Unauthoraized.' })
 

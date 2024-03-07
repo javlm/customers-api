@@ -9,17 +9,17 @@ router.post('/login', async (request, response) => {
         const { username, password } = request.body;
 
         const user = await User.findOne({ username });
-        if (!user) return response.status(404).json({ message: 'User not found' });
+        if (!user) return response.status(404).json({ msg: 'User not found' });
 
         const isPasswordOk = await bcrypt.compare(password, user.password);
-        if (!isPasswordOk) return response.status(401).json({ message: 'Password is incorrect' })
+        if (!isPasswordOk) return response.status(401).json({ msg: 'Password is incorrect' })
 
-        const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY, { expiresIn: '30m' });
+        const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY, { expiresIn: '1h' });
 
-        response.status(200).json({ token })
+        response.status(200).json({ id:user._id, token:token })
     } catch (error) {
         console.log(error);
-        response.status(500).json({ message: 'Server Error' })
+        response.status(500).json({ msg: 'Server Error' })
     }
 });
 

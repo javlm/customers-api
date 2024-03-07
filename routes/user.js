@@ -34,36 +34,39 @@ router.post("/signup", async (request, response) => {
 router.put('/account/update/:id', Middleware, async (request, response) => {
   try {
     const { id } = request.params;
-    const { username, password } = request.body;
+    const { username, password, email, birthday, phone } = request.body;
 
     let user = await User.findById(id);
     if (!user) return response.status(404).json({ msg: 'User not found, account data cannot be updated' })
 
     user.username = username || user.username;
+    user.email = email || user.email;
+    user.birthday = birthday || user.birthday;
+    user.phone = phone || user.phone;
 
     await user.save();
-    res.status(200).json({ msg: 'Account data updated successfully' });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ msg: 'Server Error' });
+    response.status(200).json({ msg: 'Account data updated successfully' });
+  } catch (error) {
+    console.error(error);
+    response.status(500).json({ msg: 'Server Error' });
   }
 });
 
 router.delete('/account/delete/:id', Middleware, async (request, response) => {
   try {
-    const { id } = reqques.params;
+    const { id } = request.params;
 
     let user = await User.findById(id);
     if (!user) return response.status(404).json({ msg: 'User not found' });
 
     await user.remove();
     
-    response.status(200).json({ message: 'User deleted successfully' });
+    response.status(200).json({ msg: 'User deleted successfully' });
   } catch (error) {
-    console.error(err);
-    res.status(500).json({ msg: 'Server Error' });
+    console.error(error);
+    response.status(500).json({ msg: 'Server Error' });
   }
 })
-router.
 
-  module.exports = router;
+
+module.exports = router;

@@ -30,3 +30,5 @@ app.use("/api", (request, response) => {
 app.listen(PORT, () => {
   console.log(`Listening to http://localhost:${PORT}`);
 });
+
+module.exports = app;
