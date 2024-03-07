@@ -21,9 +21,10 @@ app.use(express.json());
 app.use(cors(corsOptions));
 
 app.use("/api/users", require("./routes/user"));
+app.use("/api/auth", require("./routes/auth"));
 
 app.use("/api", (request, response) => {
-  response.status(200).json({ message: "Users API working" });
+  response.status(200).json({ msg: "Users API working" });
 });
 
 app.listen(PORT, () => {
