@@ -56,10 +56,10 @@ router.delete('/account/:id', Middleware, async (request, response) => {
   try {
     const { id } = request.params;
 
-    let user = await User.findById(id);
+    const user = await User.findById(id);
     if (!user) return response.status(404).json({ msg: 'User not found' });
 
-    await user.remove();
+    await user.deleteOne();
     
     response.status(200).json({ msg: 'User deleted successfully' });
   } catch (error) {
